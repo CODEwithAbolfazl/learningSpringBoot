@@ -1,19 +1,26 @@
 package com.example.learnspringboot.modes;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "books")
 public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
     private String title;
     private String author;
+    @Column(columnDefinition = "numeric")
     private double price;
-    private String genre;
 
 
-    public Book(Long id, String title, String author, double price, String genre) {
-        this.id = id;
+    public Book( String title, String author, double price) {
         this.title = title;
         this.author = author;
         this.price = price;
-        this.genre = genre;
     }
 
     public void setId(Long id) {
@@ -32,9 +39,6 @@ public class Book {
         this.price = price;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
 
     public Long getId() {
         return id;
@@ -52,7 +56,4 @@ public class Book {
         return author;
     }
 
-    public String getGenre() {
-        return genre;
-    }
 }
