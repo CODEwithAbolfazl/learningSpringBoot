@@ -2,33 +2,28 @@ package com.example.learnspringboot.modes;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "authors")
-public class Author {
-
+@Table(name = "categories")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-    private String email;
 
-    @OneToMany(mappedBy = "authorInfo")
-    private List<Book> books = new ArrayList<>();;
+    @ManyToMany(mappedBy = "categoryList")
+    private List <Book> books ;
 
-    public Author() {
-    }
-
-    public Author(Long id, String name, String email, List<Book> books) {
+    public Category(Long id, String name, List<Book> books) {
         this.id = id;
         this.name = name;
-        this.email = email;
         this.books = books;
     }
 
+    public Category() {
+    }
 
     public Long getId() {
         return id;
@@ -42,20 +37,12 @@ public class Author {
         return books;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public void setBooks(List<Book> books) {

@@ -2,6 +2,9 @@ package com.example.learnspringboot.modes;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "books")
 public class Book {
@@ -27,13 +30,36 @@ public class Book {
     private Author authorInfo;
 
 
-    public Book( String title, String author, double price) {
+
+    @ManyToMany
+    @JoinTable ( name = "book_category" ,
+    joinColumns =  @JoinColumn (name = "book_id" ),
+            inverseJoinColumns = @JoinColumn (name = "category_id" )
+    )
+    private List<Category> categoryList = new ArrayList<>(); ;
+
+
+    public Book(Long id, String title, String author, double price, ISBN isbn, Author authorInfo, List<Category> categoryList) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.price = price;
+        this.isbn = isbn;
+        this.authorInfo = authorInfo;
+        this.categoryList = categoryList;
     }
 
+
+
     public Book() {}
+
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
+    }
 
     public void setAuthorInfo(Author authorInfo) {
         this.authorInfo = authorInfo;
