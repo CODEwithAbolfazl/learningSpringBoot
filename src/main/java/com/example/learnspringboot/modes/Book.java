@@ -17,10 +17,26 @@ public class Book {
     private double price;
 
 
+
+    @OneToOne
+    @JoinColumn( name = "ISBN_id")
+    private ISBN isbn;
+
+
     public Book( String title, String author, double price) {
         this.title = title;
         this.author = author;
         this.price = price;
+    }
+
+    public Book() {}
+
+    public ISBN getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(ISBN isbn) {
+        this.isbn = isbn;
     }
 
     public void setId(Long id) {
