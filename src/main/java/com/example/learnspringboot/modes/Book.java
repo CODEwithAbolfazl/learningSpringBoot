@@ -22,6 +22,10 @@ public class Book {
     @JoinColumn( name = "ISBN_id")
     private ISBN isbn;
 
+    @ManyToOne
+    @JoinColumn (name ="author_id" )
+    private Author authorInfo;
+
 
     public Book( String title, String author, double price) {
         this.title = title;
@@ -30,6 +34,14 @@ public class Book {
     }
 
     public Book() {}
+
+    public void setAuthorInfo(Author authorInfo) {
+        this.authorInfo = authorInfo;
+    }
+
+    public Author getAuthorInfo() {
+        return authorInfo;
+    }
 
     public ISBN getIsbn() {
         return isbn;
